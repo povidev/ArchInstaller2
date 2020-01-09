@@ -7,7 +7,7 @@ export ADDITIONALYAYPKG="lineageos-devel megatools"
 export SYSTEMLOCALE="en_US"
 export HOSTNAME="arch"
 timedatectl set-ntp true
-parted /dev/${DISK} mklabel gpt mkpart primary 2MiB 512MiB mkpart primary 512MiB 100% set 1 esp on
+parted -s /dev/${DISK} mklabel gpt mkpart primary 2MiB 512MiB mkpart primary 512MiB 100% set 1 esp on
 mkfs.ext4 /dev/${DISK}2
 mkfs.fat -F32 /dev/${DISK}1
 mount /dev/${DISK}2 /mnt

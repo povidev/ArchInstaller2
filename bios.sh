@@ -7,7 +7,7 @@ export ADDITIONALYAYPKG="lineageos-devel megatools"
 export SYSTEMLOCALE="en_US"
 export HOSTNAME="arch"
 timedatectl set-ntp true
-parted /dev/${DISK} mklabel msdos mkpart primary 2MiB 100% set 1 boot on
+parted -s /dev/${DISK} mklabel msdos mkpart primary 2MiB 100% set 1 boot on
 mkfs.ext4 /dev/${DISK}1
 mount /dev/${DISK}1 /mnt
 pacstrap /mnt base linux linux-firmware networkmanager sudo grub base-devel nano wget openssh ${ADDITIONALPKG}

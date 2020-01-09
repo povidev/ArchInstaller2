@@ -25,7 +25,7 @@ passwd user
 wget https://aur.archlinux.org/cgit/aur.git/snapshot/yay.tar.gz
 tar -xzf yay.tar.gz
 cd yay
-makepkg -si
+su -c "makepkg -si" user
 cd ..
 rm -rf yay
 echo "[multilib]" >> /etc/pacman.conf

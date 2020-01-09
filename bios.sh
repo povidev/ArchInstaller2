@@ -30,7 +30,6 @@ echo "Include = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
 pacman -Syu lib32-gcc-libs
 grub-install /dev/sda
 grub-mkconfig -o /boot/grub/grub.cfg
-pacman -R $(pacman -Qdtq)
 EOF
 chmod 755 /mnt/configure.sh
 arch-chroot /mnt /configure.sh

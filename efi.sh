@@ -22,12 +22,13 @@ systemctl enable NetworkManager
 systemctl enable sshd
 useradd -s /bin/bash -mG wheel user
 passwd user
-wget https://aur.archlinux.org/cgit/aur.git/snapshot/yay.tar.gz
-tar -xzf yay.tar.gz
-cd yay
+cd /home/user
+su -c "wget https://aur.archlinux.org/cgit/aur.git/snapshot/yay.tar.gz" user
+su -c "tar -xzf yay.tar.gz" user
+su -c "cd yay" user
 su -c "makepkg -si" user
-cd ..
-rm -rf yay
+su -c "cd .." user
+su -c "rm -rf yay" user
 echo "[multilib]" >> /etc/pacman.conf
 echo "Include = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
 pacman -Syu lib32-gcc-libs

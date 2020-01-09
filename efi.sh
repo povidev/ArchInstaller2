@@ -7,7 +7,7 @@ mount /dev/sda2 /mnt
 mkdir /mnt/boot
 mkdir /mnt/boot/efi
 mount /dev/sda1 /mnt/boot/efi
-pacstrap /mnt base linux linux-firmware networkmanager sudo grub efibootmgr base-devel nano wget openssh jenkins
+pacstrap /mnt base linux linux-firmware networkmanager sudo grub efibootmgr base-devel nano wget openssh jenkins htop
 genfstab -U /mnt >> /mnt/etc/fstab
 cat << EOF > /mnt/configure.sh
 ln -sf /usr/share/zoneinfo/Asia/Omsk /etc/localtime
@@ -35,6 +35,7 @@ echo "[multilib]" >> /etc/pacman.conf
 echo "Include = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
 pacman -Syu lib32-gcc-libs
 sudo -u user yay -Syu lineageos-devel
+sudo -u user yay -Syu megatools
 grub-install
 grub-mkconfig -o /boot/grub/grub.cfg
 EOF

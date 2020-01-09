@@ -25,6 +25,7 @@ cd yay
 sudo -u user makepkg -si
 cd ..
 rm -rf yay
+rm -rf yay.tar.gz
 echo "[multilib]" >> /etc/pacman.conf
 echo "Include = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
 pacman -Syu lib32-gcc-libs

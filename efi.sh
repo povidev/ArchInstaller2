@@ -23,17 +23,18 @@ systemctl enable sshd
 useradd -s /bin/bash -mG wheel user
 passwd user
 cd /home/user
-su -c "wget https://aur.archlinux.org/cgit/aur.git/snapshot/yay.tar.gz" user
-su -c "tar -xzf yay.tar.gz" user
-su -c "cd yay" user
-su -c "makepkg -si" user
-su -c "cd .." user
-su -c "rm -rf yay" user
+sudo -u user wget https://aur.archlinux.org/cgit/aur.git/snapshot/yay.tar.gz
+sudo -u user tar -xzf yay.tar.gz
+cd yay
+sudo -u user makepkg -si
+cd ..
+rm -rf yay
 echo "[multilib]" >> /etc/pacman.conf
 echo "Include = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
 pacman -Syu lib32-gcc-libs
 grub-install
 grub-mkconfig -o /boot/grub/grub.cfg
+pacman -R $(pacman -Qdtq)
 EOF
 chmod 755 /mnt/configure.sh
 arch-chroot /mnt /configure.sh

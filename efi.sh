@@ -7,7 +7,7 @@ mount /dev/sda2 /mnt
 mkdir /mnt/boot
 mkdir /mnt/boot/efi
 mount /dev/sda1 /mnt/boot/efi
-pacstrap /mnt base linux linux-firmware networkmanager sudo grub efibootmgr base-devel nano wget openssh
+pacstrap /mnt base linux linux-firmware networkmanager sudo grub efibootmgr nano
 genfstab -U /mnt >> /mnt/etc/fstab
 cat << EOF > /mnt/configure.sh
 ln -sf /usr/share/zoneinfo/Asia/Omsk /etc/localtime
@@ -19,20 +19,8 @@ echo "arch" >> /etc/hostname
 echo "127.0.0.1 localhost" >> /etc/hosts
 echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
 systemctl enable NetworkManager
-systemctl enable sshd
-useradd -s /bin/bash -mG wheel user
+useradd -mG wheel user
 passwd user
-cd /home/user
-sudo -u user wget https://aur.archlinux.org/cgit/aur.git/snapshot/yay.tar.gz
-sudo -u user tar -xzf yay.tar.gz
-cd yay
-sudo -u user makepkg -si
-cd ..
-rm -rf yay
-rm -rf yay.tar.gz
-echo "[multilib]" >> /etc/pacman.conf
-echo "Include = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
-pacman -Syu lib32-gcc-libs
 grub-install
 grub-mkconfig -o /boot/grub/grub.cfg
 EOF

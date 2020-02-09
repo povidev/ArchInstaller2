@@ -7,7 +7,7 @@ mount /dev/sda2 /mnt
 mkdir /mnt/boot
 mkdir /mnt/boot/efi
 mount /dev/sda1 /mnt/boot/efi
-pacstrap /mnt base linux linux-firmware networkmanager sudo grub efibootmgr nano
+pacstrap /mnt base linux linux-firmware networkmanager sudo grub efibootmgr nano xfce4 lightdm lightdm-gtk-greeter xorg-server
 genfstab -U /mnt >> /mnt/etc/fstab
 cat << EOF > /mnt/configure.sh
 ln -sf /usr/share/zoneinfo/Asia/Omsk /etc/localtime
@@ -18,7 +18,7 @@ echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 echo "arch" >> /etc/hostname
 echo "127.0.0.1 localhost" >> /etc/hosts
 echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
-systemctl enable NetworkManager
+systemctl enable NetworkManager lightdm
 useradd -mG wheel user
 passwd user
 grub-install
